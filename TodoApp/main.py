@@ -24,7 +24,7 @@ async def read_all(db: db_dependency):
 
 
 @app.get("/todo/{todo_id}")
-async def read_todo(todo_id: int, db: Session = Depends(db_dependency)):
+async def read_todo(db: db_dependency, todo_id: int):
     todo_model = db.query(Todos).filter(Todos.id == todo_id).first()
     if todo_model is not None:
         return todo_model
