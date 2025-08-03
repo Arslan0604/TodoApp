@@ -1,7 +1,6 @@
 from typing import Annotated
 from pydantic import BaseModel, Field
-from sqlalchemy.orm import Session, DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import String, Integer, Boolean
+from sqlalchemy.orm import Session
 from fastapi import FastAPI, Depends, HTTPException, Path, status
 
 import models
@@ -55,8 +54,8 @@ async def create_todo(db: db_dependency, todo_request: TodoRequest):
     
 @app.put("/todo/{todo_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def update_todo(db: db_dependency,
-                      todo_id: int, 
-                      todo_request: TodoRequest):
+                      todo_request: TodoRequest,
+                      todo_id: int = Path(gt=0)):
     todo_model = db.query(Todos).filter(Todos.id == todo_id).first()
     if todo_model is None:
         raise HTTPException(status_code=404, detail='Todo not found.')
