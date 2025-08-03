@@ -1,4 +1,5 @@
 from typing import Annotated
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from fastapi import FastAPI, Depends, HTTPException, Path, status
 import models
@@ -17,6 +18,15 @@ def get_db():
         db.close()
         
 db_dependency = Annotated[Session, Depends(get_db)]
+
+
+
+class TodoRequest(BaseModel):
+    title: str
+    description: str 
+    priority: int 
+    complete: bool 
+    
         
 @app.get("/", status_code=status.HTTP_200_OK)
 async def read_all(db: db_dependency):
