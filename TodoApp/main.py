@@ -1,5 +1,5 @@
 from typing import Annotated
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from fastapi import FastAPI, Depends, HTTPException, Path, status
 import models
@@ -22,7 +22,7 @@ db_dependency = Annotated[Session, Depends(get_db)]
 
 
 class TodoRequest(BaseModel):
-    title: str
+    title: str = Field()
     description: str 
     priority: int 
     complete: bool 
