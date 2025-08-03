@@ -2,6 +2,7 @@ from typing import Annotated
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from fastapi import FastAPI, Depends, HTTPException, Path, status
+
 import models
 from models import Todos
 from database import engine, SessionLocal
@@ -25,7 +26,7 @@ class TodoRequest(BaseModel):
     title: str = Field(min_length=3)
     description: str = Field(min_length=3, max_length=100)
     priority: int = Field(gt=0, le=6)
-    complete: bool 
+    completed: bool 
     
         
 @app.get("/", status_code=status.HTTP_200_OK)
