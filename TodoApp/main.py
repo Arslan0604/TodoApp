@@ -49,3 +49,4 @@ async def create_todo(db: db_dependency, todo_request: TodoRequest):
     
     db.add(todo_model)
     db.commit()
+    
