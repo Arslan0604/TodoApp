@@ -1,6 +1,7 @@
 from typing import Annotated
 from pydantic import BaseModel, Field
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, DeclarativeBase, Mapped, mapped_column
+from sqlalchemy import String, Integer, Boolean
 from fastapi import FastAPI, Depends, HTTPException, Path, status
 
 import models
