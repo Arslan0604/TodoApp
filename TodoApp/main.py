@@ -2,10 +2,10 @@ from typing import Annotated
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from fastapi import FastAPI, Depends, HTTPException, Path, status
-
 import models
 from models import Todos
 from database import engine, SessionLocal
+
 
 app = FastAPI()
 
