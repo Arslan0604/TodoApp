@@ -12,7 +12,7 @@ class CreateUserRequest(BaseModel):
     password: str
     role: str
 
-@router.post("/auth/")
+@router.post("/auth")
 async def create_user(create_user_request: CreateUserRequest):
     create_user_model = Users(
         email=create_user_request.email,
