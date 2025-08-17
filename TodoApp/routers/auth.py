@@ -19,18 +19,10 @@ class CreateUserRequest(BaseModel):
     password: str
     role: str
     
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-        
-db_dependency = Annotated[Session, Depends(get_db)]
 
-@router.post("/auth", status_code=status.HTTP_201_CREATED)
-async def create_user(db: db_dependency,
-                      create_user_request: CreateUserRequest):
+        
+@router.post("/auth")
+async def create_user(create_user_request: CreateUserRequest):
     create_user_model = Users(
         email=create_user_request.email,
         username=create_user_request.username,
@@ -41,8 +33,8 @@ async def create_user(db: db_dependency,
         is_active=True
     )
     
-    db.add(create_user_model)
-    db.commit()
+    return create_user_model
+    
     
     
     
