@@ -32,7 +32,7 @@ def get_db():
         
 db_dependency = Annotated[Session, Depends(get_db)]
         
-@router.post("/auth")
+@router.post("/auth", status_code=status.HTTP_201_CREATED)
 async def create_user(create_user_request: CreateUserRequest):
     create_user_model = Users(
         email=create_user_request.email,
