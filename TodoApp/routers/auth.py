@@ -20,6 +20,17 @@ class CreateUserRequest(BaseModel):
     role: str
     
 
+router = APIRouter()
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+        
+db_dependency = Annotated[Session, Depends(get_db)]
         
 @router.post("/auth")
 async def create_user(create_user_request: CreateUserRequest):
