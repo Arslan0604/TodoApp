@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from models import Users
@@ -49,7 +49,7 @@ def authenticate_user(username: str, password: str, db):
 def create_access_token(username: str, user_id: int, expires_delta: timedelta):
     
     encode = {"sub": username, "id": user_id}
-    expires = datetime.utcnow()
+    expires = datetime.now(timezone.utc)
     
         
 @router.post("/auth", status_code=status.HTTP_201_CREATED)
