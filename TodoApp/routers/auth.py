@@ -49,7 +49,9 @@ def authenticate_user(username: str, password: str, db):
 def create_access_token(username: str, user_id: int, expires_delta: timedelta):
     
     encode = {"sub": username, "id": user_id}
-    expires = datetime.now(timezone.utc)
+    expires = datetime.now(timezone.utc) + expires_delta
+    encode.update({"exp": expires})
+    return jwt.encode(encode, SECRET_KEY, algorithm=ALGORITHM)
     
         
 @router.post("/auth", status_code=status.HTTP_201_CREATED)
@@ -75,7 +77,9 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
     user = authenticate_user(form_data.username, form_data.password, db)
     if not user:
         return 'Failed Authentication'
-    return "Successfully Authenticated"
+    token = create_access_token(user.username, user.id, timedelta(minutes=20))
+        
+    return token 
     
     
     
