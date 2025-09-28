@@ -49,7 +49,7 @@ def authenticate_user(username: str, password: str, db):
 def create_access_token(username: str, user_id: int, expires_delta: timedelta):
     
     encode = {"sub": username, "id": user_id}
-    expires = datetime
+    expires = datetime.utcnow()
     
         
 @router.post("/auth", status_code=status.HTTP_201_CREATED)
