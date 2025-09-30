@@ -44,7 +44,7 @@ def authenticate_user(username: str, password: str, db):
         return False
     if not bcrypt_context.verify(password, user.hashed_password):
         return False
-    return True
+    return user
 
 def create_access_token(username: str, user_id: int, expires_delta: timedelta):
     
