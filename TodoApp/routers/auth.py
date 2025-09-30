@@ -7,8 +7,8 @@ from database import SessionLocal
 from typing import Annotated
 from sqlalchemy.orm import Session
 from starlette import status
-from fastapi.security import OAuth2PasswordRequestForm 
-from jose import jwt 
+from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
+from jose import jwt
 
 router = APIRouter()
 
@@ -16,6 +16,7 @@ SECRET_KEY = "59c2f1dc6918c86dbe36a61ffc4ccc889ca7a9db65a2ead38485c6e58e20c4fd"
 ALGORITHM = "HS256"
 
 bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
+oauth2_bearer = OAuth2PasswordBearer(tokenUrl='token')
 
 class CreateUserRequest(BaseModel):
     username: str
