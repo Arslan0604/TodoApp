@@ -49,7 +49,7 @@ async def create_todo(user: user_dependency, db: db_dependency,
     
     if user is None:
         raise HTTPException(status_code=401, detail="Authentication Failed.")
-    todo_model = Todos(**todo_request.model_dump())
+    todo_model = Todos(**todo_request.model_dump(), owner_id=user.get('id'))
     
     
     db.add(todo_model)
