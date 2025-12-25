@@ -58,4 +58,6 @@ def test_todo():
 def test_read_all_authenticated():
     response = client.get("/")
     assert response.status_code == status.HTTP_200_OK
-    assert response.json() == []
+    assert response.json() == [{'complete': False, 'title': 'learn to code', 
+                                'description': 'Need to learn everyday!', 
+                                'owner_id': 1, 'priority': 5}]
