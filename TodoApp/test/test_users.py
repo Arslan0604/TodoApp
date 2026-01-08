@@ -10,3 +10,10 @@ def test_get_user(test_user):
     response = client.get('/user/')
     assert response.status_code == status.HTTP_200_OK
     assert response.json()['username'] == 'codingwitharslan'
+    assert response.json()['email'] == 'codingwitharslan@gmail.com'
+    assert response.json()['first_name'] == 'Arslan'
+    assert response.json()['last_name'] == 'Ovezov'
+    assert response.json()['role'] == 'admin'
+    assert response.json()['phone_number'] == '(111)-111-1111'
+    
+    
