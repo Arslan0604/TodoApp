@@ -6,7 +6,7 @@ from fastapi import status
 app.dependency_overrides[get_db] = override_get_db
 app.dependency_overrides[get_current_user] = override_get_current_user
 
-def test_get_user():
+def test_get_user(test_user):
     response = client.get('/user/')
     assert response.status_code == status.HTTP_200_OK
-    
+    assert response.json()['username'] == 'codingwitharslan'
