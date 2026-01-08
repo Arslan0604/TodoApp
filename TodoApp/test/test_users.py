@@ -17,3 +17,7 @@ def test_get_user(test_user):
     assert response.json()['phone_number'] == '(111)-111-1111'
     
     
+def test_change_password_success(test_user):
+    response = client.put("/user/password", json={"password": "testpassword",
+                                                         "new_password": "newpassword"})
+    assert response.status_code == status.HTTP_204_NO_CONTENT
