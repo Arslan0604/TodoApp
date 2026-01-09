@@ -12,3 +12,10 @@ def test_authenticate_user(test_user):
     authenticated_user = authenticate_user(test_user.username, "testpassword", db)
     assert authenticated_user is not None
     assert authenticated_user.username == test_user.username
+
+
+    non_existent_user = authenticate_user("WrongUsername", 'testpassword', db)
+    assert non_existent_user is False
+    
+    wrong_password_user = authenticate_user(test_user.username, "WrongPassword", db)
+    assert wrong_password_user is False
