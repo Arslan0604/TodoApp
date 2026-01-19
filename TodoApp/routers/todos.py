@@ -34,6 +34,11 @@ class TodoRequest(BaseModel):
     priority: int = Field(gt=0, le=6)
     completed: bool 
     
+def redirect_to_login():
+    redirect_response = RedirectResponse(url="/auth/login-page", status_code=status.HTTP_302_FOUND)
+    redirect_response.delete_cookie(key="access_token")
+    return redirect_response
+    
 ### Pages ### 
 @router.get("/todo-page")
 async def render_todo_page(request: Request, db: db_dependency):
@@ -44,7 +49,9 @@ async def render_todo_page(request: Request, db: db_dependency):
         
         todos = db.query(Todos).filter(Todos.owner_id == user.get("id")).all()
         
-        return templates.TemplateResponse("todo.html")
+        return templates.TemplateResponse("todo.html", {"request": request, "todos": todos, "user": user})
+    except:
+        return redirect_to_login()
 
 
 ### Endpoints ###    
