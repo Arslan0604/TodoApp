@@ -26,6 +26,6 @@ class Todos(Base):
     title = Column(String(255))
     description = Column(String(255))
     priority = Column(Integer)
-    completed = Column(Boolean, default=False)
+    complete = Column(Boolean, default=False)
     owner_id = Column(Integer, ForeignKey("users.id"))
     
