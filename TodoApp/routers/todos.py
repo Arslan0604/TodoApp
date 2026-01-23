@@ -32,7 +32,7 @@ class TodoRequest(BaseModel):
     title: str = Field(min_length=3)
     description: str = Field(min_length=3, max_length=100)
     priority: int = Field(gt=0, le=6)
-    completed: bool 
+    complete: bool 
     
 def redirect_to_login():
     redirect_response = RedirectResponse(url="/auth/login-page", status_code=status.HTTP_302_FOUND)
@@ -104,7 +104,7 @@ async def update_todo(user: user_dependency, db: db_dependency,
     todo_model.title = todo_request.title
     todo_model.description = todo_request.description
     todo_model.priority = todo_request.priority
-    todo_model.completed = todo_request.completed
+    todo_model.complete = todo_request.complete
     
     db.add(todo_model)
     db.commit()
