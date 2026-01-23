@@ -7,6 +7,7 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
+
 Base.metadata.create_all(bind=engine)
 
 templates = Jinja2Templates(directory="TodoApp/templates")
