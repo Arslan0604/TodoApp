@@ -123,11 +123,4 @@ async def delete_todo(user: user_dependency, db: db_dependency, todo_id: int = P
     db.commit()
 
 
-@router.get("/debug/complete-all")
-async def debug_complete_all(db: db_dependency):
-    todos = db.query(Todos).all()
-    for todo in todos:
-        todo.completed = True
 
-    db.commit()
-    return {"message": "All todos marked as complete"}
