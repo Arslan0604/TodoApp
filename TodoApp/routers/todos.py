@@ -65,6 +65,9 @@ async def render_todo_page(request: Request):
         return templates.TemplateResponse("add-todo.html", {"request": request, "user": user})
     except:
         return redirect_to_login()
+    
+    
+@router.get('/edit-todo-page/{todo_id}')
 
 ### Endpoints ###    
 @router.get("/", status_code=status.HTTP_200_OK)
