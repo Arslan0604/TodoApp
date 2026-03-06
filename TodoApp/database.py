@@ -2,6 +2,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import os   # this I have added to fix
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # SQLALCHEMY_DATABASE_URL = "postgresql://postgres:1234@localhost/TodoApplicationDatabase" # its for postgres
 # SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:arslan060482@127.0.0.1:3306/TodoApplicationDatabase" #its for mysql
