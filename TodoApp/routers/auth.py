@@ -10,6 +10,7 @@ from starlette import status
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import jwt, JWTError
 from fastapi.templating import Jinja2Templates
+from pathlib import Path as FilePath
 
 router = APIRouter(
     prefix="/auth",
@@ -45,7 +46,8 @@ def get_db():
         
 db_dependency = Annotated[Session, Depends(get_db)]
 
-templates = Jinja2Templates(directory="TodoApp/templates")
+BASE_DIR = FilePath(__file__).resolve().parent.parent
+templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
 ### Pages ###
 
@@ -125,4 +127,3 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
     
     
    
-

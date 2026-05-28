@@ -8,8 +8,10 @@ from ..database import SessionLocal
 from .auth import get_current_user
 from starlette.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
+from pathlib import Path as FilePath
 
-templates = Jinja2Templates(directory="TodoApp/templates")
+BASE_DIR = FilePath(__file__).resolve().parent.parent
+templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
 router = APIRouter(
     prefix="/todos",
@@ -149,6 +151,4 @@ async def delete_todo(user: user_dependency, db: db_dependency, todo_id: int = P
     db.query(Todos).filter(Todos.id == todo_id).filter(Todos.owner_id == user.get('id')).delete()
     
     db.commit()
-
-
 
